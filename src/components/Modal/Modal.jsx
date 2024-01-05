@@ -13,14 +13,13 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
         description: "",
         price: "",
         image: "",
-        coordinates: [48.60, 31.00],
+        coordinates: [],
     };
 
     const [newProduct, setNewProduct] = useState({...initialProduct});
 
     const handleAddNewProduct = (event) => {
         event.preventDefault();
-        console.log('newProduct', [...allProducts, newProduct]);
         setAllProducts([newProduct, ...allProducts]);
         setIsModalOpen(false);
         setNewProduct({...initialProduct});
@@ -31,7 +30,6 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
 
         useMapEvents({
             click: (event) => {
-                console.log('markerGroupRef', markerGroupRef);
                 markerGroupRef.current.clearLayers();
 
                 const coordinatesArray = event.latlng
@@ -44,12 +42,15 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
 
                 const newMarker = L.marker(event.latlng);
                 markerGroupRef.current.addLayer(newMarker);
-
-                //L.marker(event.latlng).addTo(event.target);
             },
         });
         return null;
     };
+
+    const handleCancelForm = () => {
+        setIsModalOpen(false);
+        setNewProduct({...initialProduct});
+    }
 
     return (
         <section className={`modal ${isModalOpen ? 'open' : ''}`}>
@@ -68,6 +69,7 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
                         name="name"
                         id="name"
                         value={newProduct.name}
+                        required={true}
                         onChange={(event) => setNewProduct({...newProduct, name: event.target.value})}
                     />
                 </label>
@@ -79,6 +81,7 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
                         name="description"
                         id="description"
                         value={newProduct.description}
+                        required={true}
                         onChange={(event) => setNewProduct({...newProduct, description: event.target.value})}
                     />
                 </label>
@@ -86,29 +89,30 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
                 <label htmlFor="price">
                     Price:
                     <input
-                        type="text"
+                        type="number"
                         name="price"
                         id="price"
                         value={newProduct.price}
+                        required={true}
                         onChange={(event) => setNewProduct({...newProduct, price: event.target.value})}
                     />
                 </label>
 
                 <label htmlFor="coordinates">
-                    Please, choose coordinates on map:
+                   Coordinates:
                     <input
                         type="text"
                         name="coordinates"
                         id="coordinates"
                         value={newProduct.coordinates}
-                        onChange={(event) => {
-                            const coordinatesArray = event.target.value.split(',').map(coord => Number(coord.trim()));
-                            setNewProduct({...newProduct, coordinates: coordinatesArray});
-                        }}
+                        placeholder="Please, choose on map"
+                        readOnly={true}
+                        required={true}
                     />
                 </label>
 
-                <button type="submit" className="button">Ok</button>
+                <button type="submit" className="button" disabled={newProduct.coordinates.length === 0}>Ok</button>
+                <button type="reset" className="button" onClick={() => handleCancelForm()}>Cancel</button>
 
             </form>
         </section>

@@ -4,14 +4,19 @@ import 'leaflet/dist/leaflet.css';
 import Modal from "../Modal/Modal";
 import Maps from "../Maps/Maps";
 
-const Main = ({allProducts, setAllProducts, setSelectedProducts}) => {
+const Main = ({allProducts, setAllProducts, selectedProducts, setSelectedProducts}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handlerShowAllProducts = () => {
+        setSelectedProducts([...allProducts])
+    }
 
     return (
         <section className="general">
 
             <Maps
                 allProducts={allProducts}
+                selectedProducts={selectedProducts}
                 setSelectedProducts={setSelectedProducts}
             />
 
@@ -22,6 +27,15 @@ const Main = ({allProducts, setAllProducts, setSelectedProducts}) => {
                     onClick={() => setIsModalOpen(true)}
                 >
                     Add
+                </button>
+
+                <button
+                    className="button"
+                    type="button"
+                    onClick={() => handlerShowAllProducts()}
+                    disabled={allProducts.length === selectedProducts.length}
+                >
+                    Show all products
                 </button>
             </section>
 

@@ -1,7 +1,7 @@
 import './App.scss';
 import Main from "./components/Main/Main";
 import Aside from "./components/Aside/Aside";
-import {products} from "./assets/utils";
+import {products} from "./utils";
 import React, {useEffect, useState} from "react";
 
 function App() {
