@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Main from "./components/Main/Main";
+import Aside from "./components/Aside/Aside";
+import {products} from "./assets/utils";
+import React, {useEffect, useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [allProducts, setAllProducts] = useState([...products]);
+    const [selectedProducts, setSelectedProducts] = useState([...allProducts]);
+
+    useEffect(() => {
+        setSelectedProducts([...allProducts]);
+    }, [allProducts])
+
+    return (
+        <div className="App">
+            <main className="container">
+                <Main
+                    allProducts={allProducts}
+                    setAllProducts={setAllProducts}
+                    selectedProducts={selectedProducts}
+                    setSelectedProducts={setSelectedProducts}
+                />
+                <Aside products={selectedProducts}/>
+            </main>
+        </div>
+    );
 }
 
 export default App;

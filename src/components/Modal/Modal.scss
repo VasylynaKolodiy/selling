@@ -1,0 +1,42 @@
+.modal{
+  border: 1px solid red;
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  background-color: white;
+  padding: 32px;
+  transition: top .3s linear;
+  display: flex;align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+
+
+  &.open{
+    top: 50%;
+  }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    label{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+  }
+
+  .maps{
+    width: 600px;
+    height: 400px;
+  }
+
+}
