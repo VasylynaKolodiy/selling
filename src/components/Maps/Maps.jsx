@@ -1,24 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Maps.scss"
 import {MapContainer, Marker, TileLayer} from "react-leaflet";
 import L from "leaflet";
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
-let DefaultIcon = L.icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow,
-})
-L.Marker.prototype.options.icon = DefaultIcon;
 
 const Maps = ({
                   allProducts,
                   setFilteredProducts = null,
                   selectedProduct = null,
                   setSelectedProduct = null,
-                  MapEvents = null
+                  MapEvents = null,
               }) => {
     const position = [48.60, 31.00]; // Coordinates for center
+    const [map, setMap] = useState(null);
 
     const customMarkerIcon = new L.Icon({
         iconUrl: 'https://static.vecteezy.com/system/resources/previews/022/062/128/large_2x/location-pointer-pin-icon-free-png.png',
@@ -34,8 +27,6 @@ const Maps = ({
         popupAnchor: [1, -34],
     })
 
-    const mapRef = useRef();
-    const map = mapRef.current;
     const [currentBounds, setCurrentBounds] = useState(map?.getBounds() || null);
 
     function isPointInBounds(point, bounds) {
@@ -69,7 +60,7 @@ const Maps = ({
                 }
             };
         }
-    }, [mapRef.current, setCurrentBounds]);
+    }, [map, currentBounds]);
 
     useEffect(() => {
         if (setFilteredProducts && currentBounds) {
@@ -78,7 +69,7 @@ const Maps = ({
             })
             result && setFilteredProducts(result);
         }
-    }, [currentBounds, allProducts])
+    }, [currentBounds, allProducts, selectedProduct])
 
     return (
         <article className="maps">
@@ -88,7 +79,8 @@ const Maps = ({
                 minZoom={6}
                 scrollWheelZoom={true}
                 style={{height: "100%", width: "100%",}}
-                ref={mapRef}
+                // ref={mapRef}
+                ref={setMap}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -107,7 +99,7 @@ const Maps = ({
                             eventHandlers={{
                                 click: () => {
                                     setSelectedProduct && (
-                                        selectedProduct?.id === product.id ? setSelectedProduct(null) : setSelectedProduct(product)
+                                        (selectedProduct?.id === product.id) ? setSelectedProduct(null) : setSelectedProduct(product)
                                     );
                                 },
                             }}
