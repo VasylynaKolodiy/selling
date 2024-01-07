@@ -1,23 +1,29 @@
 import React, {useState} from 'react';
 import './Main.scss';
 import 'leaflet/dist/leaflet.css';
-import Modal from "../Modal/Modal";
+import ModalAddNewProduct from "../ModalAddNewProduct/ModalAddNewProduct";
 import Maps from "../Maps/Maps";
 
-const Main = ({allProducts, setAllProducts, selectedProducts, setSelectedProducts}) => {
+const Main = ({
+                  allProducts,
+                  setAllProducts,
+                  setFilteredProducts,
+                  selectedProduct,
+                  setSelectedProduct
+              }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handlerShowAllProducts = () => {
-        setSelectedProducts([...allProducts])
+    const handleResetFilters = () => {
+        setSelectedProduct(null);
     }
 
     return (
         <section className="general">
-
             <Maps
                 allProducts={allProducts}
-                selectedProducts={selectedProducts}
-                setSelectedProducts={setSelectedProducts}
+                setFilteredProducts={setFilteredProducts}
+                selectedProduct={selectedProduct}
+                setSelectedProduct={setSelectedProduct}
             />
 
             <section className="buttons">
@@ -32,14 +38,14 @@ const Main = ({allProducts, setAllProducts, selectedProducts, setSelectedProduct
                 <button
                     className="button"
                     type="button"
-                    onClick={() => handlerShowAllProducts()}
-                    disabled={allProducts.length === selectedProducts.length}
+                    onClick={() => handleResetFilters()}
+                    disabled={!selectedProduct}
                 >
                     Show all products
                 </button>
             </section>
 
-            <Modal
+            <ModalAddNewProduct
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 allProducts={allProducts}

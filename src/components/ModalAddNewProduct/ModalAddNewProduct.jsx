@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react';
-import "./Modal.scss"
+import "./ModalAddNewProduct.scss"
 import {v4 as uuidv4} from "uuid";
 import Maps from "../Maps/Maps";
 import {useMapEvents} from "react-leaflet";
 import L from "leaflet";
 
-const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
+const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
 
     const initialProduct = {
         id: uuidv4(),
@@ -17,13 +17,6 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
     };
 
     const [newProduct, setNewProduct] = useState({...initialProduct});
-
-    const handleAddNewProduct = (event) => {
-        event.preventDefault();
-        setAllProducts([newProduct, ...allProducts]);
-        setIsModalOpen(false);
-        setNewProduct({...initialProduct});
-    }
 
     const MapEvents = () => {
         const markerGroupRef = useRef(L.layerGroup())
@@ -37,7 +30,7 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
                     .replace('LatLng(', '')
                     .replace(')', '')
                     .split(',')
-                    .map((coord) => Number(coord.trim()));
+                    .map((coordinate) => Number(coordinate.trim()));
                 setNewProduct({...newProduct, coordinates: coordinatesArray});
 
                 const newMarker = L.marker(event.latlng);
@@ -46,6 +39,13 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
         });
         return null;
     };
+
+    const handleAddNewProduct = (event) => {
+        event.preventDefault();
+        setAllProducts([newProduct, ...allProducts]);
+        setIsModalOpen(false);
+        setNewProduct({...initialProduct});
+    }
 
     const handleCancelForm = () => {
         setIsModalOpen(false);
@@ -99,7 +99,7 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
                 </label>
 
                 <label htmlFor="coordinates">
-                   Coordinates:
+                    Coordinates:
                     <input
                         type="text"
                         name="coordinates"
@@ -111,12 +111,24 @@ const Modal = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
                     />
                 </label>
 
-                <button type="submit" className="button" disabled={newProduct.coordinates.length === 0}>Ok</button>
-                <button type="reset" className="button" onClick={() => handleCancelForm()}>Cancel</button>
+                <button
+                    type="submit"
+                    className="button"
+                    disabled={newProduct.coordinates.length === 0}
+                >
+                    Ok
+                </button>
 
+                <button
+                    type="reset"
+                    className="button"
+                    onClick={() => handleCancelForm()}
+                >
+                    Cancel
+                </button>
             </form>
         </section>
     );
 };
 
-export default Modal;
+export default ModalAddNewProduct;

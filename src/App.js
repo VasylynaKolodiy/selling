@@ -2,15 +2,12 @@ import './App.scss';
 import Main from "./components/Main/Main";
 import Aside from "./components/Aside/Aside";
 import {products} from "./utils";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 function App() {
-    const [allProducts, setAllProducts] = useState([...products]);
-    const [selectedProducts, setSelectedProducts] = useState([...allProducts]);
-
-    useEffect(() => {
-        setSelectedProducts([...allProducts]);
-    }, [allProducts])
+    const [allProducts, setAllProducts] = useState(products);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState(allProducts);
 
     return (
         <div className="App">
@@ -18,10 +15,11 @@ function App() {
                 <Main
                     allProducts={allProducts}
                     setAllProducts={setAllProducts}
-                    selectedProducts={selectedProducts}
-                    setSelectedProducts={setSelectedProducts}
+                    setFilteredProducts={setFilteredProducts}
+                    selectedProduct={selectedProduct}
+                    setSelectedProduct={setSelectedProduct}
                 />
-                <Aside products={selectedProducts}/>
+                <Aside products={selectedProduct ? [selectedProduct] : filteredProducts}/>
             </main>
         </div>
     );

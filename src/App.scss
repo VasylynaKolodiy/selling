@@ -58,6 +58,14 @@ svg {
   gap: 32px;
 }
 
+.button{
+  cursor: pointer;
+
+  &:disabled{
+    cursor: default;
+  }
+}
+
 .App {
 
 }
