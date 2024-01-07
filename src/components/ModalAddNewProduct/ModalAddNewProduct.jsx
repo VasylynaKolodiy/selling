@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import "./ModalAddNewProduct.scss"
 import {v4 as uuidv4} from "uuid";
 import Maps from "../Maps/Maps";
 import {useMapEvents} from "react-leaflet";
 import L from "leaflet";
+import {position} from "../../utils";
 
 const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
 
@@ -17,6 +18,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
     };
 
     const [newProduct, setNewProduct] = useState({...initialProduct});
+    const [map, setMap] = useState(null);
 
     const MapEvents = () => {
         const markerGroupRef = useRef(L.layerGroup())
@@ -37,6 +39,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                 markerGroupRef.current.addLayer(newMarker);
             },
         });
+
         return null;
     };
 
@@ -52,11 +55,17 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
         setNewProduct({...initialProduct});
     }
 
+    useEffect(() => {
+        map?.setView(position, 6);
+    }, [isModalOpen])
+
     return (
         <section className={`modal ${isModalOpen ? 'open' : ''}`}>
             <Maps
                 allProducts={[newProduct]}
                 MapEvents={MapEvents}
+                map={map}
+                setMap={setMap}
             />
             <form
                 className="form"

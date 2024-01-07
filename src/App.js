@@ -15,6 +15,7 @@ function App() {
                 <Main
                     allProducts={allProducts}
                     setAllProducts={setAllProducts}
+                    filteredProducts={filteredProducts}
                     setFilteredProducts={setFilteredProducts}
                     selectedProduct={selectedProduct}
                     setSelectedProduct={setSelectedProduct}

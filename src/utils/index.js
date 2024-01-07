@@ -26,3 +26,5 @@ export const products = [
         coordinates: [50.12, 25.16],
     }
 ]
+
+export const position = [48.60, 31.00]; // Coordinates for center

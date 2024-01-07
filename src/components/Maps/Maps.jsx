@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "./Maps.scss"
 import {MapContainer, Marker, TileLayer} from "react-leaflet";
 import L from "leaflet";
+import {position} from "../../utils";
 
 const Maps = ({
                   allProducts,
@@ -9,9 +10,9 @@ const Maps = ({
                   selectedProduct = null,
                   setSelectedProduct = null,
                   MapEvents = null,
+                  map,
+                  setMap
               }) => {
-    const position = [48.60, 31.00]; // Coordinates for center
-    const [map, setMap] = useState(null);
 
     const customMarkerIcon = new L.Icon({
         iconUrl: 'https://static.vecteezy.com/system/resources/previews/022/062/128/large_2x/location-pointer-pin-icon-free-png.png',
@@ -79,7 +80,6 @@ const Maps = ({
                 minZoom={6}
                 scrollWheelZoom={true}
                 style={{height: "100%", width: "100%",}}
-                // ref={mapRef}
                 ref={setMap}
             >
                 <TileLayer
