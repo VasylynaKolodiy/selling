@@ -3,6 +3,7 @@ import "./Maps.scss"
 import {MapContainer, Marker, TileLayer} from "react-leaflet";
 import L from "leaflet";
 import {position} from "../../utils";
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const Maps = ({
                   allProducts,
@@ -44,7 +45,7 @@ const Maps = ({
     }
 
     useEffect(() => {
-        if(map) setCurrentBounds(map?.getBounds())
+        if (map) setCurrentBounds(map?.getBounds())
     }, [map])
 
     useEffect(() => {
@@ -90,27 +91,32 @@ const Maps = ({
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {allProducts.map((product) => (
-                    Array.isArray(product.coordinates) && product.coordinates.length === 2 && (
-                        <Marker
-                            position={product.coordinates}
-                            key={product.id}
-                            icon={
-                                (selectedProduct && (product.id === selectedProduct.id))
-                                    ? selectedMarkerIcon
-                                    : customMarkerIcon
-                            }
-                            eventHandlers={{
-                                click: () => {
-                                    setSelectedProduct && (
-                                        (selectedProduct?.id === product.id) ? setSelectedProduct(null) : setSelectedProduct(product)
-                                    );
-                                },
-                            }}
-                        >
-                        </Marker>
-                    )
-                ))}
+
+                <MarkerClusterGroup
+                    chunkedLoading
+                >
+                    {allProducts.map((product) => (
+                        Array.isArray(product.coordinates) && product.coordinates.length === 2 && (
+                            <Marker
+                                position={product.coordinates}
+                                key={product.id}
+                                icon={
+                                    (selectedProduct && (product.id === selectedProduct.id))
+                                        ? selectedMarkerIcon
+                                        : customMarkerIcon
+                                }
+                                eventHandlers={{
+                                    click: () => {
+                                        setSelectedProduct && (
+                                            (selectedProduct?.id === product.id) ? setSelectedProduct(null) : setSelectedProduct(product)
+                                        );
+                                    },
+                                }}
+                            >
+                            </Marker>
+                        )
+                    ))}
+                </MarkerClusterGroup>
 
                 {MapEvents && <MapEvents/>}
 
