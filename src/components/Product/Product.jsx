@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Product.scss"
+import {defaultProductImage} from "../../utils";
 
 const Product = ({product}) => {
     const MAX_DESCRIPTION_LENGTH = 25;
@@ -8,10 +9,16 @@ const Product = ({product}) => {
         <article className="product">
             <div className="product__image">
                 {product.image
-                    ? <img src={product.image} alt={product.name}/>
-                    : <img
-                        src="https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg"
+                    ? <img
+                        src={product.image}
+                        onError={(event) => {
+                            event.target.src = defaultProductImage;
+                        }}
                         alt={product.name}/>
+                    : <img
+                        src={defaultProductImage}
+                        alt={product.name}
+                    />
                 }
             </div>
 
@@ -20,7 +27,7 @@ const Product = ({product}) => {
                 <p className="product__price">{product.price} UAH</p>
                 <p className="product__description">
                     {product.description.slice(0, MAX_DESCRIPTION_LENGTH)}
-                    {product.description.length >MAX_DESCRIPTION_LENGTH ? "..." : ""}
+                    {product.description.length > MAX_DESCRIPTION_LENGTH ? "..." : ""}
                 </p>
             </div>
         </article>
