@@ -5,6 +5,7 @@ import Maps from "../Maps/Maps";
 import {useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import {position} from "../../utils";
+import {ReactComponent as IconClose} from "../../assets/images/icon-close.svg";
 
 const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
 
@@ -61,6 +62,11 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
 
     return (
         <section className={`modal ${isModalOpen ? 'open' : ''}`}>
+
+            <div className="modal__close" onClick={() => setIsModalOpen(false)}>
+                <IconClose/>
+            </div>
+
             <Maps
                 allProducts={[newProduct]}
                 MapEvents={MapEvents}
@@ -71,65 +77,67 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                 className="form"
                 onSubmit={(event) => handleAddNewProduct(event)}
             >
-                <label htmlFor="name">
-                    Name:
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        value={newProduct.name}
-                        required={true}
-                        onChange={(event) => setNewProduct({...newProduct, name: event.target.value})}
-                    />
-                </label>
+                <div className="form__inputs">
+                    <label htmlFor="name">
+                        <sup>*</sup>Name:
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            value={newProduct.name}
+                            required={true}
+                            onChange={(event) => setNewProduct({...newProduct, name: event.target.value})}
+                        />
+                    </label>
 
-                <label htmlFor="description">
-                    Description:
-                    <input
-                        type="text"
-                        name="description"
-                        id="description"
-                        value={newProduct.description}
-                        required={true}
-                        onChange={(event) => setNewProduct({...newProduct, description: event.target.value})}
-                    />
-                </label>
+                    <label htmlFor="description">
+                        <sup>*</sup>Description:
+                        <input
+                            type="text"
+                            name="description"
+                            id="description"
+                            value={newProduct.description}
+                            required={true}
+                            onChange={(event) => setNewProduct({...newProduct, description: event.target.value})}
+                        />
+                    </label>
 
-                <label htmlFor="price">
-                    Price:
-                    <input
-                        type="number"
-                        name="price"
-                        id="price"
-                        value={newProduct.price}
-                        required={true}
-                        onChange={(event) => setNewProduct({...newProduct, price: event.target.value})}
-                    />
-                </label>
+                    <label htmlFor="price">
+                        <sup>*</sup>Price:
+                        <input
+                            type="number"
+                            name="price"
+                            id="price"
+                            value={newProduct.price}
+                            required={true}
+                            onChange={(event) => setNewProduct({...newProduct, price: event.target.value})}
+                        />
+                    </label>
 
-                <label htmlFor="image">
-                    Image:
-                    <input
-                        type="text"
-                        name="image"
-                        id="image"
-                        value={newProduct.image}
-                        onChange={(event) => setNewProduct({...newProduct, image: event.target.value})}
-                    />
-                </label>
+                    <label htmlFor="image">
+                        Image:
+                        <input
+                            type="text"
+                            name="image"
+                            id="image"
+                            value={newProduct.image}
+                            onChange={(event) => setNewProduct({...newProduct, image: event.target.value})}
+                        />
+                    </label>
 
-                <label htmlFor="coordinates">
-                    Coordinates:
-                    <input
-                        type="text"
-                        name="coordinates"
-                        id="coordinates"
-                        value={newProduct.coordinates}
-                        placeholder="Please, choose on map"
-                        readOnly={true}
-                        required={true}
-                    />
-                </label>
+                    <label htmlFor="coordinates">
+                        <sup>*</sup>Coordinates:
+                        <input
+                            type="text"
+                            name="coordinates"
+                            id="coordinates"
+                            value={newProduct.coordinates}
+                            placeholder="Please, choose on map"
+                            readOnly={true}
+                            required={true}
+                        />
+                    </label>
+                </div>
 
                 <div className="buttons">
                     <button

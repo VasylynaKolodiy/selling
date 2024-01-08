@@ -62,10 +62,22 @@ svg {
 
 .button{
   cursor: pointer;
+  padding: 8px 16px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  background-color: lightblue;
+  transition: background-color .3s linear;
 
   &:disabled{
     cursor: default;
   }
+
+  &:hover:not(:disabled){
+    background-color: lightskyblue;
+  }
+
 }
 
 .App {
