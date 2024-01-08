@@ -29,7 +29,6 @@ const Maps = ({
     })
 
     const [currentBounds, setCurrentBounds] = useState(null);
-    console.log(currentBounds, 'currentBounds')
 
     function isPointInBounds(point, bounds) {
         const {lat: pointLat, lng: pointLng} = L.latLng(point);
