@@ -85,6 +85,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                             name="name"
                             id="name"
                             value={newProduct.name}
+                            autoComplete="off"
                             required={true}
                             onChange={(event) => setNewProduct({...newProduct, name: event.target.value})}
                         />
@@ -97,6 +98,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                             name="description"
                             id="description"
                             value={newProduct.description}
+                            autoComplete="off"
                             required={true}
                             onChange={(event) => setNewProduct({...newProduct, description: event.target.value})}
                         />
@@ -109,6 +111,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                             name="price"
                             id="price"
                             value={newProduct.price}
+                            autoComplete="off"
                             required={true}
                             onChange={(event) => setNewProduct({...newProduct, price: event.target.value})}
                         />
@@ -121,6 +124,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                             name="image"
                             id="image"
                             value={newProduct.image}
+                            autoComplete="off"
                             onChange={(event) => setNewProduct({...newProduct, image: event.target.value})}
                         />
                     </label>
@@ -133,6 +137,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                             id="coordinates"
                             value={newProduct.coordinates}
                             placeholder="Please, choose on map"
+                            autoComplete="off"
                             readOnly={true}
                             required={true}
                         />
