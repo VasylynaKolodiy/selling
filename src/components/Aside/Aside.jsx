@@ -6,9 +6,12 @@ const Aside = ({products}) => {
     return (
         <aside className="aside">
             <div className="products">
-                {products.map((product) => (
-                    <Product product={product} key={product.id}/>
-                ))}
+                {products.length > 0
+                    ? products.map((product) => (
+                        <Product product={product} key={product.id}/>
+                    ))
+                    : <p>No results</p>
+                }
             </div>
         </aside>
     );

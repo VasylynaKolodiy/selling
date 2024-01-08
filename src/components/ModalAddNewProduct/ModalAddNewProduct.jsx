@@ -52,11 +52,11 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
 
     const handleCancelForm = () => {
         setIsModalOpen(false);
-        setNewProduct({...initialProduct});
     }
 
     useEffect(() => {
         map?.setView(position, 6);
+        return setNewProduct({...initialProduct});
     }, [isModalOpen])
 
     return (
@@ -107,6 +107,17 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                     />
                 </label>
 
+                <label htmlFor="image">
+                    Image:
+                    <input
+                        type="text"
+                        name="image"
+                        id="image"
+                        value={newProduct.image}
+                        onChange={(event) => setNewProduct({...newProduct, image: event.target.value})}
+                    />
+                </label>
+
                 <label htmlFor="coordinates">
                     Coordinates:
                     <input
@@ -120,21 +131,23 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                     />
                 </label>
 
-                <button
-                    type="submit"
-                    className="button"
-                    disabled={newProduct.coordinates.length === 0}
-                >
-                    Ok
-                </button>
+                <div className="buttons">
+                    <button
+                        type="submit"
+                        className="button"
+                        disabled={newProduct.coordinates.length === 0}
+                    >
+                        Ok
+                    </button>
 
-                <button
-                    type="reset"
-                    className="button"
-                    onClick={() => handleCancelForm()}
-                >
-                    Cancel
-                </button>
+                    <button
+                        type="reset"
+                        className="button"
+                        onClick={() => handleCancelForm()}
+                    >
+                        Cancel
+                    </button>
+                </div>
             </form>
         </section>
     );

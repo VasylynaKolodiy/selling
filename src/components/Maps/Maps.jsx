@@ -28,7 +28,8 @@ const Maps = ({
         popupAnchor: [1, -34],
     })
 
-    const [currentBounds, setCurrentBounds] = useState(map?.getBounds() || null);
+    const [currentBounds, setCurrentBounds] = useState(null);
+    console.log(currentBounds, 'currentBounds')
 
     function isPointInBounds(point, bounds) {
         const {lat: pointLat, lng: pointLng} = L.latLng(point);
@@ -42,6 +43,10 @@ const Maps = ({
             pointLng >= southWestLng
         );
     }
+
+    useEffect(() => {
+        if(map) setCurrentBounds(map?.getBounds())
+    }, [map])
 
     useEffect(() => {
         if (setFilteredProducts) {

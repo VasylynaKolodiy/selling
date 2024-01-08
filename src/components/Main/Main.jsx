@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Main.scss';
 import 'leaflet/dist/leaflet.css';
 import ModalAddNewProduct from "../ModalAddNewProduct/ModalAddNewProduct";
@@ -25,6 +25,10 @@ const Main = ({
         setSelectedProduct(null);
         map.setView(position, 6);
     }
+
+    useEffect(() => {
+        map?.setView(position, 6);
+    }, [allProducts])
 
     return (
         <section className="general">
@@ -56,9 +60,11 @@ const Main = ({
                 </button>
             </section>
 
+            <div className={`overlay ${isModalOpen ? 'visible' : ''}`} onClick={() => setIsModalOpen(false)}/>
             <ModalAddNewProduct
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
+                setFilteredProducts={setFilteredProducts}
                 allProducts={allProducts}
                 setAllProducts={setAllProducts}
             />
