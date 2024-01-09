@@ -6,7 +6,7 @@ import {position} from "../../utils";
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const Maps = ({
-                  allProducts,
+                  products,
                   setFilteredProducts = null,
                   selectedProduct = null,
                   setSelectedProduct = null,
@@ -70,12 +70,12 @@ const Maps = ({
 
     useEffect(() => {
         if (setFilteredProducts && currentBounds) {
-            const result = allProducts.filter((product) => {
+            const result = products.filter((product) => {
                 return isPointInBounds(product.coordinates, currentBounds) && product;
             })
             result && setFilteredProducts(result);
         }
-    }, [currentBounds, allProducts, selectedProduct])
+    }, [currentBounds, products, selectedProduct])
 
     return (
         <article className="maps">
@@ -95,7 +95,7 @@ const Maps = ({
                 <MarkerClusterGroup
                     chunkedLoading
                 >
-                    {allProducts.map((product) => (
+                    {products.map((product) => (
                         Array.isArray(product.coordinates) && product.coordinates.length === 2 && (
                             <Marker
                                 position={product.coordinates}

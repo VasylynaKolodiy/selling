@@ -4,10 +4,9 @@ import 'leaflet/dist/leaflet.css';
 import ModalAddNewProduct from "../ModalAddNewProduct/ModalAddNewProduct";
 import Maps from "../Maps/Maps";
 import {position} from "../../utils";
+import {useGetProductsQuery} from "../../redux/products.api";
 
 const Main = ({
-                  allProducts,
-                  setAllProducts,
                   filteredProducts,
                   setFilteredProducts,
                   selectedProduct,
@@ -16,6 +15,7 @@ const Main = ({
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [map, setMap] = useState(null);
+    const {data: allProducts = []} = useGetProductsQuery();
 
     const handleAddNewProduct = () => {
         setIsModalOpen(true);
@@ -33,7 +33,7 @@ const Main = ({
     return (
         <section className="general">
             <Maps
-                allProducts={allProducts}
+                products={allProducts}
                 setFilteredProducts={setFilteredProducts}
                 selectedProduct={selectedProduct}
                 setSelectedProduct={setSelectedProduct}
@@ -47,7 +47,7 @@ const Main = ({
                     type="button"
                     onClick={() => handleAddNewProduct()}
                 >
-                    Add
+                    Add product
                 </button>
 
                 <button
@@ -56,7 +56,7 @@ const Main = ({
                     onClick={() => handleResetFilters()}
                     disabled={!selectedProduct && (allProducts.length === filteredProducts.length)}
                 >
-                    Show all products
+                    Reset filters
                 </button>
             </section>
 
@@ -64,9 +64,6 @@ const Main = ({
             <ModalAddNewProduct
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
-                setFilteredProducts={setFilteredProducts}
-                allProducts={allProducts}
-                setAllProducts={setAllProducts}
             />
         </section>
     );

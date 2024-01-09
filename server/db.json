@@ -6,15 +6,21 @@
       "description": "product 1 descriprion",
       "price": "100",
       "image": "https://kdvir.com.ua/images/blog/new_year2.jpg",
-      "coordinates": [50.4501, 30.5234]
+      "coordinates": [
+        50.4501,
+        30.5234
+      ]
     },
     {
-      "id":  2,
+      "id": 2,
       "name": "product 2",
       "description": "product 2 descriprion",
       "price": "200",
       "image": "https://lviv1256.com/wp-content/uploads/2020/06/174691005_2809768469334443_9017259295088506484_n.jpg",
-      "coordinates": [49.647381,23.85102]
+      "coordinates": [
+        49.647381,
+        23.85102
+      ]
     },
     {
       "id": 3,
@@ -22,7 +28,10 @@
       "description": "product 3 descriprion",
       "price": "300",
       "image": "https://dovkola.media/wp-content/uploads/2023/09/333435858.jpeg",
-      "coordinates": [48.18381,36.214264]
+      "coordinates": [
+        48.18381,
+        36.214264
+      ]
     },
     {
       "id": 4,
@@ -30,7 +39,10 @@
       "description": "product 4 descriprion",
       "price": "400",
       "image": "https://d17916g5ax9y2r.cloudfront.net/public/uploads/article/image_attachment/file/590/sm_8becdf9a4d97ab763ca94bffd7effeab.jpg",
-      "coordinates": [49.808232,23.958572]
+      "coordinates": [
+        49.808232,
+        23.958572
+      ]
     }
   ]
 }

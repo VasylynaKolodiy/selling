@@ -2,13 +2,13 @@
   width: 100%;
   min-width: 202px;
   height: 200px;
-  border-radius: 16px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 
   &__image {
     width: 100%;
@@ -21,9 +21,8 @@
       max-height: 150px;
       object-fit: cover;
       object-position: center center;
-      border-top-right-radius: 16px;
-      border-top-left-radius: 16px;
-
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
     }
   }
 
@@ -32,9 +31,7 @@
     padding: 0 8px 8px 8px;
   }
 
-  &__description{
+  &__description {
     color: gray;
   }
-
-
 }

@@ -6,8 +6,9 @@ import {useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import {position} from "../../utils";
 import {ReactComponent as IconClose} from "../../assets/images/icon-close.svg";
+import {useAddProductMutation} from "../../redux/products.api";
 
-const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllProducts}) => {
+const ModalAddNewProduct = ({isModalOpen, setIsModalOpen}) => {
 
     const initialProduct = {
         id: uuidv4(),
@@ -20,6 +21,14 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
 
     const [newProduct, setNewProduct] = useState({...initialProduct});
     const [map, setMap] = useState(null);
+    const [addProduct, {}] = useAddProductMutation();
+
+    const handleAddNewProduct = async (event) => {
+        event.preventDefault();
+        await addProduct(newProduct).unwrap();
+        setIsModalOpen(false);
+        setNewProduct({...initialProduct});
+    }
 
     const MapEvents = () => {
         const markerGroupRef = useRef(L.layerGroup())
@@ -44,13 +53,6 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
         return null;
     };
 
-    const handleAddNewProduct = (event) => {
-        event.preventDefault();
-        setAllProducts([newProduct, ...allProducts]);
-        setIsModalOpen(false);
-        setNewProduct({...initialProduct});
-    }
-
     const handleCancelForm = () => {
         setIsModalOpen(false);
     }
@@ -68,7 +70,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
             </div>
 
             <Maps
-                allProducts={[newProduct]}
+                products={[newProduct]}
                 MapEvents={MapEvents}
                 map={map}
                 setMap={setMap}
@@ -136,7 +138,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen, allProducts, setAllPro
                             name="coordinates"
                             id="coordinates"
                             value={newProduct.coordinates}
-                            placeholder="Please, choose on map"
+                            placeholder="choose on the map..."
                             autoComplete="off"
                             readOnly={true}
                             required={true}

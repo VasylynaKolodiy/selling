@@ -1,4 +1,4 @@
-.general{
+.general {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -9,25 +9,26 @@
   height: 100%;
 }
 
-.buttons{
+.buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 32px;
 }
 
-.overlay{
+.overlay {
   display: none;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 2000;
   cursor: pointer;
+  transition: opacity .5s linear;
 
-  &.visible{
+  &.visible {
     display: block;
   }
 }

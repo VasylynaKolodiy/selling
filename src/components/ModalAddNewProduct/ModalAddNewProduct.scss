@@ -1,4 +1,4 @@
-.modal{
+.modal {
   position: fixed;
   top: -100%;
   left: 50%;
@@ -6,18 +6,19 @@
   z-index: 2000;
   background-color: white;
   padding: 32px;
-  transition: top .3s linear;
-  display: flex;align-items: flex-start;
+  transition: top .5s linear;
+  display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 32px;
   border-radius: 16px;
   height: 70vh;
 
-  &.open{
+  &.open {
     top: 50%;
   }
 
-  .form{
+  .form {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -27,14 +28,15 @@
     overflow-y: auto;
     padding: 0 8px;
 
-    &__inputs{
+    &__inputs {
       display: flex;
       flex-direction: column;
       gap: 16px;
       align-items: flex-start;
       justify-content: flex-start;
 
-      & input{
+      & input {
+        font-family: 'Roboto Condensed', sans-serif;
         height: 30px;
         outline: none;
         border: none;
@@ -42,27 +44,27 @@
       }
     }
 
-    label{
+    label {
       margin-bottom: 8px;
       text-align: left;
 
-      & sup{
+      & sup {
         color: red;
       }
     }
 
-    .buttons{
+    .buttons {
       margin: 0 auto;
       padding-bottom: 8px;
     }
   }
 
-  .maps{
+  .maps {
     width: 50vw;
     height: 100%;
   }
 
-  &__close{
+  &__close {
     position: absolute;
     right: 16px;
     top: 16px;
