@@ -21,7 +21,7 @@ const ModalAddNewProduct = ({isModalOpen, setIsModalOpen}) => {
 
     const [newProduct, setNewProduct] = useState({...initialProduct});
     const [map, setMap] = useState(null);
-    const [addProduct, {}] = useAddProductMutation();
+    const [addProduct] = useAddProductMutation();
 
     const handleAddNewProduct = async (event) => {
         event.preventDefault();
